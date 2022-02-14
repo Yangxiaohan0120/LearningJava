@@ -22,14 +22,18 @@ public class BinaryTreePath {
             return res;
         }
 
-        List<String> left = binaryTreePaths(root.left);
-        for (int i = 0; i < left.size(); i++) {
-            res.add(String.valueOf(root.val) + "->" + left.get(i));
+        if(root.left != null) {
+            List<String> left = binaryTreePaths(root.left);
+            for (int i = 0; i < left.size(); i++) {
+                res.add(String.valueOf(root.left.val) + "->" + left.get(i));
+            }
         }
 
-        List<String> right = binaryTreePaths(root.right);
-        for (int i = 0; i < right.size(); i++) {
-            res.add(String.valueOf(root.val) + "->" + right.get(i));
+        if(root.right != null) {
+            List<String> right = binaryTreePaths(root.right);
+            for (int i = 0; i < right.size(); i++) {
+                res.add(String.valueOf(root.right.val) + "->" + right.get(i));
+            }
         }
 
         return res;
