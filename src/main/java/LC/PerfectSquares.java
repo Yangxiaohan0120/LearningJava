@@ -42,6 +42,8 @@ public class PerfectSquares {
         throw new IllegalArgumentException();
     }
 
+    // 使用动态规划解决
+
     public static void main(String[] args) {
         int n = 8;
         System.out.println(new PerfectSquares().numSquares(n));
