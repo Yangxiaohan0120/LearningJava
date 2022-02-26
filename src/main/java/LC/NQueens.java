@@ -81,7 +81,7 @@ public class NQueens {
     }
 
     public static void main(String[] args) {
-        int n = 8;
+        int n = 5;
         List<List<String>> res = new NQueens().solveNQueens(n);
         for (int i = 0; i < res.size(); i++) {
             for (int j = 0; j < n; j++) {

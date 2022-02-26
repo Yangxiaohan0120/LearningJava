@@ -30,12 +30,19 @@ public class MinimumSizeSubarraySum {
             }
 
             if(sum >= s)
-                res = Math.max(res,r-l+1);
+                res = Math.min(res,r-l+1);
         }
 
         if(res == nums.length+1)
             return 0;
         return res;
+    }
+
+    public static void main(String[] args) {
+        int sum = 6;
+        int[] nums = {1,4,5,2,7};
+        String s = "abda";
+        System.out.println(new LC.MinimumSizeSubarraySum().MinimumSizeSubarraySum(sum,nums));
     }
 
 }

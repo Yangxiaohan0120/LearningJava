@@ -32,6 +32,7 @@ class Solution {
 
         Queue<Pair<TreeNode,Integer>> q = new LinkedList<>();
         q.add(new Pair<>(root,0));
+
         while(!q.isEmpty()){
             TreeNode node = q.peek().getKey();
             int level = q.peek().getValue();

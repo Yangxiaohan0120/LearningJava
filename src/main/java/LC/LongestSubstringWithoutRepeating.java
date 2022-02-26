@@ -1,5 +1,7 @@
 package LC;
 
+import java.util.List;
+
 /**
  * @ author: yxh
  * @ created: 2022-02-09 : 3:46 PM
@@ -26,6 +28,13 @@ public class LongestSubstringWithoutRepeating {
         }
 
         return res;
+    }
+
+    public static void main(String[] args) {
+        String s = "abdb";
+        LC.LongestSubstringWithoutRepeating ls = new LongestSubstringWithoutRepeating();
+        int res = ls.LongestSubstringWithoutRepeating(s);
+        System.out.println(res);
     }
 
 }

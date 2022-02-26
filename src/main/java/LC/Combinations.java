@@ -29,6 +29,8 @@ public class Combinations {
         // 还有k - p.size 个元素。在[i ... n]中至少有（k-p.size)
         // i 最多为 n -（k-p.size) +1
         // 回溯法的剪枝，n-k+1 之后的数不可取
+
+        // 保证还有剩余的数字 （n - i）剩余数字 >= k-p.size()-1 还需要选择的数字 ===> n + 1 - (k-p.size) >= i
         for (int i = start; i <= n - (k - p.size()) + 1; i++) {
             p.add(i);
             findCombinations(n, k, i + 1, p);// 递归调用 i 之后的数字

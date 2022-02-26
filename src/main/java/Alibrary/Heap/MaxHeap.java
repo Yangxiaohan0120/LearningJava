@@ -95,7 +95,7 @@ public class MaxHeap<E extends Comparable<E>> {
                 break;
 
             data.swap(k, j);
-            k = j;
+            k = j; // 置换一层后，将继续向下交换，直到变为叶子节点。
         }
     }
 

@@ -44,7 +44,7 @@ public class LetterCombinationsofaPhoneNumber {
     }
 
     public static void main(String[] args) {
-        String digits = "234";
+        String digits = "134";
         List<String> res = new LetterCombinationsofaPhoneNumber().letterCombinations(digits);
         for (int i = 0; i < res.size(); i++) {
             System.out.println(res.get(i));

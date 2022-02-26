@@ -53,6 +53,7 @@ public class PartitionEqualSubsetSum {
 
         int n = nums.length;
         int C = sum/2;
+
         boolean[] memos = new boolean[C+1];
         for (int i = 0; i < memos.length; i++) {
             memos[i] = false;

@@ -49,7 +49,7 @@ public class ClimbingStairs {
     }
 
     public static void main(String[] args) {
-        int n = 3;
+        int n = 11;
         System.out.println(new ClimbingStairs().climbStairs(n));
     }
 

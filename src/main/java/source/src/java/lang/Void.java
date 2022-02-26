@@ -41,6 +41,7 @@ class Void {
      * the keyword {@code void}.
      */
     @SuppressWarnings("unchecked")
+    // 利用反射极致进行对象的创建 （Class<name>) Class.getClassname("name")
     public static final Class<Void> TYPE = (Class<Void>) Class.getPrimitiveClass("void");
 
     /*
