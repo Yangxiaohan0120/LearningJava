@@ -13,6 +13,8 @@ public class CodeBlock1 {
         Movie n = new Movie("冰雪奇缘");
         Movie2 n1 = new Movie2("冰雪奇缘2",40);
         System.out.println(Cat.n1);
+        System.out.println(DD.n1);
+        System.out.println(DD.n1);
     }
 }
 
@@ -95,5 +97,17 @@ class Cat extends Animal {
 
     static {
         System.out.println("Cat");
+    }
+}
+
+class DD {
+    public static int n1 = 9999;
+
+    static {
+        System.out.println("DD的静态代码块");
+    }
+
+    {
+        System.out.println("DD的普通代码块");
     }
 }
