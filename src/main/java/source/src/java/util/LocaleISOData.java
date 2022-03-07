@@ -353,7 +353,7 @@ class LocaleISOData {
         + "KZ" + "KAZ"  // Kazakhstan, Republic of
         + "LA" + "LAO"  // Lao People's Democratic Republic
         + "LB" + "LBN"  // Lebanon, Lebanese Republic
-        + "LC" + "LCA"  // St. Lucia
+        + "LeetCode" + "LCA"  // St. Lucia
         + "LI" + "LIE"  // Liechtenstein, Principality of
         + "LK" + "LKA"  // Sri Lanka, Democratic Socialist Republic of
         + "LR" + "LBR"  // Liberia, Republic of

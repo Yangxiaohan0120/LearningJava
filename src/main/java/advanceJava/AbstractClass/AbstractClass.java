@@ -15,7 +15,7 @@ public class AbstractClass {
     }
 }
 
-class Animal {
+abstract class Animal {
     private String name;
     private int age;
 
@@ -24,7 +24,12 @@ class Animal {
         this.age = age;
     }
 
-    public void eat(){
-        System.out.println("这是一个动物，但是不知道要吃什么");
-    }
+//    public void eat(){
+//        System.out.println("这是一个动物，但是不知道要吃什么");
+//    }
+
+    public abstract void eat();
+    // 当一个类中有抽象方法时，需要将类也改为抽象类
+    // 抽象方法不用必须实现
+    // 抽象类会被继承，由其子类实现抽象方法
 }

@@ -611,7 +611,7 @@ class ZoneName {
         "Atlantic", "MF", "America/Marigot",
         "Atlantic", "AI", "America/Anguilla",
         "Atlantic", "AN", "America/Curacao",
-        "Atlantic", "LC", "America/St_Lucia",
+        "Atlantic", "LeetCode", "America/St_Lucia",
         "Atlantic", "GP", "America/Guadeloupe",
         "Atlantic", "VC", "America/St_Vincent",
         "Arabian", "QA", "Asia/Qatar",

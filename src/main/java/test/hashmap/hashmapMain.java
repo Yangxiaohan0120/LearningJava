@@ -1,4 +1,3 @@
-package test.hashmap;
 
 /**
  * @ author: yxh

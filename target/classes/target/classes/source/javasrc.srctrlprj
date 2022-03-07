@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<config>
+    <source_groups>
+        <source_group_ec26fc7c-c035-4e6a-b7fb-f8272737cd04>
+            <exclude_filters>
+                <exclude_filter>./</exclude_filter>
+            </exclude_filters>
+            <java_standard>15</java_standard>
+            <name>Java Source Group</name>
+            <source_extensions>
+                <source_extension>.java</source_extension>
+            </source_extensions>
+            <source_paths>
+                <source_path>./</source_path>
+            </source_paths>
+            <status>enabled</status>
+            <type>Java Source Group</type>
+            <use_jre_system_library>1</use_jre_system_library>
+        </source_group_ec26fc7c-c035-4e6a-b7fb-f8272737cd04>
+    </source_groups>
+    <version>8</version>
+</config>

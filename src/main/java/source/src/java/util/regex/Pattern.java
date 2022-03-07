@@ -5661,7 +5661,7 @@ NEXT:       while (i <= last) {
                               (1<<Character.CURRENCY_SYMBOL) |
                               (1<<Character.MODIFIER_SYMBOL) |
                               (1<<Character.OTHER_SYMBOL)));
-            defCategory("LC", ((1<<Character.UPPERCASE_LETTER) |
+            defCategory("LeetCode", ((1<<Character.UPPERCASE_LETTER) |
                                (1<<Character.LOWERCASE_LETTER) |
                                (1<<Character.TITLECASE_LETTER)));
             defCategory("LD", ((1<<Character.UPPERCASE_LETTER) |
