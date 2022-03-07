@@ -1,5 +1,4 @@
-package HashTable;
-
+package testForsrccode.HashTable;
 /**
  * @ author: yxh
  * @ created: 2021-12-16 : 10:11 AM

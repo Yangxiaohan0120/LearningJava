@@ -1,4 +1,4 @@
-package HashTable;
+package testForsrccode.HashTable;
 
 /**
  * @ author: yxh
