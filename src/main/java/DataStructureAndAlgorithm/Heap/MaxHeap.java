@@ -6,6 +6,11 @@ import DataStructureAndAlgorithm.Linear.array.Array;
  * @ author: yxh
  * @ created: 2022-01-03 : 11:24 PM
  */
+
+/*
+    最大的堆的实现（父节点一定大于左右节点，根节点为最大值）
+ */
+
 public class MaxHeap<E extends Comparable<E>> {
 
     // 可以不用考虑容量改变的问题

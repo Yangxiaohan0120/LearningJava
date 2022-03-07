@@ -6,6 +6,11 @@ import DataStructureAndAlgorithm.Linear.array.Array;
  * @ author: yxh
  * @ created: 2022-01-04 : 12:08 AM
  */
+
+/*
+    最小堆的实现（父节点一定小于左右两个节点，根节点为最小值）
+ */
+
 public class MinHeap<E extends Comparable<E>> {
 
     private Array<E> data;

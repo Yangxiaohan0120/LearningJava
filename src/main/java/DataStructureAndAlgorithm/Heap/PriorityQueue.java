@@ -4,6 +4,11 @@ package DataStructureAndAlgorithm.Heap;
  * @ author: yxh
  * @ created: 2022-01-04 : 12:11 AM
  */
+
+/*
+    使用最大堆实现优先队列
+ */
+
 public class PriorityQueue<E extends Comparable<E>> implements Queue<E> {
 
     private MaxHeap<E> maxHeap;
