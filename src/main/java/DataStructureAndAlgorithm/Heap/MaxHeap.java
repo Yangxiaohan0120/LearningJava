@@ -93,7 +93,7 @@ public class MaxHeap<E extends Comparable<E>> {
                 j++;
 
             // j 是两个孩子的大值索引
-            if (data.get(k).compareTo(data.get(j)) >= 0)
+            if (data.get(k).compareTo(data.get(j)) >= 0) // 比大孩子大，跳出循环。
                 break;
 
             data.swap(k, j);
@@ -101,7 +101,7 @@ public class MaxHeap<E extends Comparable<E>> {
         }
     }
 
-    public E replace(E e) {
+    public E replace(E e) {//最大值替换
 
         E ret = findMax();
         data.set(0, e);

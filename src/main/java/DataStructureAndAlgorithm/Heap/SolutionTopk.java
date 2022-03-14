@@ -1,7 +1,5 @@
-/// 剑指 Offer 40
+package DataStructureAndAlgorithm.Heap;/// 剑指 Offer 40
 /// https://leetcode-cn.com/problems/zui-xiao-de-kge-shu-lcof/submissions/
-
-import DataStructureAndAlgorithm.Heap.PriorityQueue;
 
 class SolutionTopk {
 
