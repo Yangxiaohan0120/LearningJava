@@ -1,4 +1,0 @@
-Manifest-Version: 1.0
-Main-Class: Multithreading.ThreadLocalDemo
-Class-Path: xbean-reflect-3.7.jar checker-qual-3.8.0.jar
-
