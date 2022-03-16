@@ -7,7 +7,7 @@ import java.util.concurrent.FutureTask;
 
 /**
  * @author Chris Yang
- * @create 2022-03-08 12:49
+ * created 2022-03-08 12:49
  **/
 public class Priority01 {
     public static void main(String[] args) {

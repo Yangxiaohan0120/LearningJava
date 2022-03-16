@@ -2,7 +2,7 @@ package Multithreading;
 
 /**
  * @author Chris Yang
- * @create 2022-03-08 13:35
+ * created 2022-03-08 13:35
  **/
 public class DeepenSleep implements Runnable {
     private int number = 10;

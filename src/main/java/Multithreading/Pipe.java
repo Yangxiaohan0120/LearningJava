@@ -6,7 +6,7 @@ import java.io.PipedWriter;
 
 /**
  * @author Chris Yang
- * @create 2022-03-08 15:35
+ * created 2022-03-08 15:35
  **/
 public class Pipe {
 

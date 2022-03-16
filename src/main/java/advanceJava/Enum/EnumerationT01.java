@@ -2,7 +2,7 @@ package advanceJava.Enum;
 
 /**
  * @author Chris Yang
- * @create 2022-03-13 21:08
+ * created 2022-03-13 21:08
  **/
 public class EnumerationT01 {
 }

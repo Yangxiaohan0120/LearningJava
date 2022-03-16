@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 /**
  * @author Chris Yang
- * @create 2022-03-07 15:01
+ * created 2022-03-07 15:01
  **/
 public class Functions {
 
@@ -55,7 +55,7 @@ public class Functions {
         } else if (totalMoney - money < 0) {
             System.out.println("余额不足");
         } else {
-            detail(false,money,detail);
+            detail(false, money, detail);
             totalMoney = totalMoney - money;
             System.out.println("消费" + money);
         }
@@ -77,7 +77,7 @@ public class Functions {
                 BufferedReader br = new BufferedReader(new FileReader(directory.getAbsolutePath() + "/detail.txt"), 65536);
                 if ((temp = br.readLine()) == null) {
                     System.out.println("No record");
-                }else {
+                } else {
                     System.out.println(temp);
                 }
                 while ((temp = br.readLine()) != null) {
@@ -90,13 +90,21 @@ public class Functions {
         }
     }
 
-    public static void quit(Scanner scanner) {
-        System.out.println("你确定要退出吗？y/n");
-        if (scanner.hasNext() && scanner.next().equals("y")) {
-            System.out.println("退出了零钱通系统！");
-        } else {
+    public static boolean quit(Scanner scanner) {
+        String answer = null;
+        do {
             System.out.println("你确定要退出吗？y/n");
+             answer = scanner.next();
         }
-        scanner.close();
+        while (!answer.equals("y") && !answer.equals("n"));
+
+        if (answer.equals("y")) {
+            System.out.println("退出了零钱通系统！");
+            scanner.close();
+            return false;
+        } else {
+            return true;
+        }
     }
+
 }

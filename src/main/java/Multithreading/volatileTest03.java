@@ -2,7 +2,7 @@ package Multithreading;
 
 /**
  * @author Chris Yang
- * @create 2022-03-08 15:28
+ * created 2022-03-08 15:28
  **/
 public class volatileTest03 {
     private static Object lock = new Object();

@@ -2,7 +2,7 @@ package Multithreading;
 
 /**
  * @author Chris Yang
- * @create 2022-03-08 16:32
+ * created 2022-03-08 16:32
  **/
 public class ThreadLocalDemo {
     static class A implements Runnable{

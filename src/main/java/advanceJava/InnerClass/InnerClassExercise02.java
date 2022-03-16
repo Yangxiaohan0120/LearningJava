@@ -2,9 +2,8 @@ package advanceJava.InnerClass;
 
 /**
  * @author Chris Yang
- * @program: PlantGenetics
- * @description:
- * @create: 2022-03-04 22:33
+ * PlantGenetics
+ * created: 2022-03-04 22:33
  **/
 
 public class InnerClassExercise02 {

@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 /**
  * @author Chris Yang
- * @create 2022-03-07 14:55
+ * created 2022-03-07 14:55
  **/
 public class Main {
 
@@ -52,8 +52,7 @@ public class Main {
             Functions.getClear(detail);
             TotalMoney = 0;
         } else if (key == 5) {
-            Functions.quit(scanner);
-            loop = false;
+            loop = Functions.quit(scanner);
         } else {
             System.out.println("Sorry, we don't have " + key + " option!");
         }

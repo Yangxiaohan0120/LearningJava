@@ -2,7 +2,7 @@ package advanceJava.InnerClass;
 
 /**
  * @author Chris Yang
- * @create 2022-03-13 20:12
+ * created 2022-03-13 20:12
  **/
 public class MemberClassTest01 {
 

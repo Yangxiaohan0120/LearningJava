@@ -2,7 +2,7 @@ package Multithreading;
 
 /**
  * @author Chris Yang
- * @create 2022-03-08 15:49
+ * created 2022-03-08 15:49
  **/
 public class Join {
     static class ThreadOri implements Runnable {

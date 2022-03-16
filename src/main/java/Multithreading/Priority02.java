@@ -4,7 +4,7 @@ import java.util.stream.IntStream;
 
 /**
  * @author Chris Yang
- * @create 2022-03-08 13:08
+ * created 2022-03-08 13:08
  **/
 public class Priority02 {
     public static class T1 extends Thread {
