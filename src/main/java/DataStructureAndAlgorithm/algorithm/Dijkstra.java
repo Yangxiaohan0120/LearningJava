@@ -22,7 +22,6 @@ public class Dijkstra {
         for (int i = 0; i < start; i++) {
             
         }
-        HashMap<Integer, Integer> map = new HashMap<>();
 
         int node = findlowestWay(0);
         while (!visited[node]){
