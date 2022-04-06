@@ -1,4 +1,4 @@
-package advanceJava.Collections;
+package advanceJava.Collections.Main;
 
 
 import java.util.Collection;
