@@ -1,4 +1,4 @@
-package com.hspedu.map_;
+package advanceJava.Collections.MapTable;
 
 import java.util.Collection;
 import java.util.HashMap;

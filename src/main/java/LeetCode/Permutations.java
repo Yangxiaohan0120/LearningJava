@@ -8,7 +8,8 @@ import java.util.List;
  * @ author: yxh
  * @ created: 2022-02-14 : 9:48 AM
  */
-public class Permutations {
+public class
+Permutations {
 
     private List<List<Integer>> res;
     private boolean[] used;
