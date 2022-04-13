@@ -6,7 +6,7 @@ import java.util.*;
  * @author Chris Yang
  * created 2022-04-11 14:17
  **/
-public class genricEcercise {
+public class GenericExercise {
     public static void main(String[] args) {
         //使用泛型方式给HashSet 放入3个学生对象
         HashSet<Student> students = new HashSet<Student>();
