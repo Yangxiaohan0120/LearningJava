@@ -4,7 +4,7 @@ package advanceJava.CodeBlock;
  * @ author: yxh
  * @ created: 2022-02-26 : 8:57 PM
  */
-public class CodeBlock1 {
+public class CodeBlockI {
 
     public static void main(String[] args) {
         Movie n = new Movie("冰雪奇缘");
