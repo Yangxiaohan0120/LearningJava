@@ -1,50 +1,96 @@
 package Multithreading;
 
-import java.util.Random;
+import javax.management.monitor.Monitor;
+import java.util.List;
+import java.util.Queue;
+import java.util.Vector;
 import java.util.concurrent.Semaphore;
+import java.util.function.Function;
 
 /**
  * @author Chris Yang
- * created 2022-05-14 16:12
+ * created 2022-05-17 22:04
  **/
+
+// 信号量的使用
 public class Semaphore_ {
+    // 模拟框架
+    int count;
+    Queue queue;
+
+    Semaphore_(int c) {
+        this.count = c;
+    }
+
+    void down() {
+        this.count--;
+        if (this.count < 0) {
+            // 当前线程插入等待队列
+            // 阻塞当前线程
+        }
+    }
+
+    void up() {
+        this.count++;
+        if (this.count >= 0) {
+            // 移除等待队列中的某个线程
+            // 唤醒线程
+        }
+    }
+
+    // 实际使用
+    static int counts;
+    static final Semaphore semaphore = new Semaphore(1);
+
+    static void addOne() throws InterruptedException {
+        // 获取信号量
+        semaphore.acquire();
+        try {
+            counts += 1;
+        }finally {
+            // 归还信号量
+            semaphore.release();
+        }
+    }
+
     public static void main(String[] args) {
 
     }
 }
 
-class SemaphoreDemo {
+// 使用信号量实现限流器
+class ObjPool<T,R>{
+    // 对象池
+    final List<T> pool;
+    // 信号量
+    final Semaphore sem;
 
-    static class MyThread implements Runnable {
-        private int value;
-        private Semaphore semaphore;
-
-        public MyThread(int value, Semaphore semaphore) {
-            this.value = value;
-            this.semaphore = semaphore;
+    public ObjPool(int size,T t){
+        this.pool = new Vector<T>(){};
+        for (int i = 0; i < size; i++) {
+            pool.add(t);
         }
+        sem = new Semaphore(size);
+    }
 
-        @Override
-        public void run() {
-            try {
-                semaphore.acquire(); //获取permit
-                System.out.println(String.format("当前线程是%d, 还剩%d个资源，还有%d个任务在等候",
-                        value, semaphore.availablePermits(), semaphore.getQueueLength()));
-                // 睡眠随机时间，打乱释放顺序
-                Random random = new Random();
-                Thread.sleep(random.nextInt(1000));
-                semaphore.release(); //释放permit
-                System.out.println(String.format("线程%d释放了资源", value));
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+    R exec(Function<T,R> func) throws Exception {
+        T t = null;
+        sem.acquire(); // 计数器减一
+        try{
+            t = pool.remove(0);
+            return func.apply(t);
+        }finally {
+            pool.add(t);
+            sem.release(); // 执行完毕，计数器加一
         }
     }
 
-    public static void main(String[] args) {
-        Semaphore semaphore = new Semaphore(3);
-        for (int i = 0; i < 10; i++) {
-            new Thread(new MyThread(i, semaphore)).start();
-        }
+    public static void main(String[] args) throws Exception {
+        String a = "cheng";
+        ObjPool<Long,String> pool = new ObjPool<>(10,2L);
+        pool.exec(t -> {
+            System.out.println(t);
+            return t.toString();
+        });
     }
 }

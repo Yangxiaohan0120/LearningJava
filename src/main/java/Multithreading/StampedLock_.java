@@ -8,6 +8,8 @@ import java.util.concurrent.locks.StampedLock;
  * created 2022-05-14 15:31
  *
 **/
+
+// 读写锁
 public class StampedLock_ {
     public static void main(String[] args) {
 
