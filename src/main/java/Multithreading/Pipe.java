@@ -59,7 +59,8 @@ public class Pipe {
     public static void main(String[] args) throws InterruptedException, IOException {
         PipedReader reader = new PipedReader();
         PipedWriter writer = new PipedWriter();
-        writer.connect(reader);
+//        writer.connect(reader);
+        reader.connect(writer);
 
         new Thread(new ReaderThread(reader)).start();
         Thread.sleep(1000);

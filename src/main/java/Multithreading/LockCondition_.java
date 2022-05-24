@@ -1,6 +1,9 @@
 package Multithreading;
 
 import javax.xml.ws.Response;
+import java.util.Random;
+import java.util.concurrent.Callable;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
@@ -12,7 +15,9 @@ import java.util.concurrent.locks.ReentrantLock;
  **/
 public class LockCondition_ {
     public static void main(String[] args) {
-
+        Thread thread;
+        Runnable runnable;
+        Callable callable;
     }
 }
 
@@ -76,6 +81,36 @@ class Condition_{
             }
         }finally {
             lock.unlock();
+        }
+    }
+}
+
+// 防止while(true)条件进入活锁
+
+class Account{
+
+    private int balance;
+
+    private final Lock lock = new ReentrantLock();
+
+    public void transfer(Account account,int count) throws InterruptedException {
+        while(true){
+            if(this.lock.tryLock()){
+                try {
+                    if(account.lock.tryLock()){
+                        try{
+                            this.balance += count;
+                            account.balance -= count;
+                            break; // 完成任务后强制退出
+                        }finally {
+                            account.lock.unlock();
+                        }
+                    }
+                }finally {
+                    lock.unlock();
+                }
+            }
+            Thread.sleep(new Random().nextInt(100)); // 随即睡眠一定时间，错开高峰期
         }
     }
 }
