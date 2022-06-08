@@ -27,7 +27,6 @@ public class ReversedLinkedList {
         }
 
         return pre;
-
     }
 
 }

@@ -3,34 +3,29 @@ package LeetCode;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 /**
- * @ author: yxh
- * @ created: 2022-02-13 : 4:03 PM
- */
-public class SymmetricTree {
+ * @author Chris Yang
+ * created 2022-06-01 17:23
+ **/
+public class BinaryTreeInorderTraversal {
 
-    public boolean isSymmetric(TreeNode root) {
+    public List<Integer> inorderTraversal(TreeNode root) {
         if (root == null) {
-            return true;
-        }else return isSym(root.left,root.right);
-
-    }
-
-    public boolean isSym(TreeNode p,TreeNode q){
-        if(p == null && q == null)return true;
-        if(p == null || q == null)return false;
-        return (p.val == q.val) && isSym(p.left,q.right) && isSym(p.right,q.left);
+            return new ArrayList<>();
+        } else {
+            return inorder(root);
+        }
     }
 
     public List<Integer> inorder(TreeNode root) {
-        List<Integer> list = new LinkedList<>();
+        List<Integer> list = new ArrayList<>();
 
         if (root.left != null) {
             list.addAll(inorder(root.left));
         }
         list.add(root.val);
-
         if (root.right != null) {
             list.addAll(inorder(root.right));
         }
@@ -39,14 +34,13 @@ public class SymmetricTree {
     }
 
     public static void main(String[] args) {
-
         TreeNode root = new TreeNode(1);
         root.left = new TreeNode(2);
-        root.right = new TreeNode(2);
-        root.left.left = new TreeNode(2);
-//        root.left.right = new TreeNode(4);
-        root.right.left = new TreeNode(2);
-//        root.right.right = new TreeNode(3);
+        root.right = new TreeNode(3);
+        root.left.left = new TreeNode(4);
+        root.left.right = new TreeNode(5);
+        root.right.left = new TreeNode(6);
+        root.right.right = new TreeNode(7);
 
 
         List<Integer> list = new BinaryTreeInorderTraversal().inorderTraversal(root);
@@ -56,9 +50,5 @@ public class SymmetricTree {
         }
 
         System.out.println("null");
-
-        System.out.println(new SymmetricTree().isSymmetric(root));
-
     }
-
 }
