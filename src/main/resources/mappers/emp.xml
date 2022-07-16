@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="emp">
+    <!-- 开启二级缓存
+        eviction 缓存的清除策略，当缓存对象数量达到上限之后，自动触发对应算法进行缓存对象清除
+        1.LRU - 最近最久未使用：移除最长时间不被使用的对象。 （LFU最少使用）
+        01 02 03 04 .. 0512
+        14 99 83 1      893
+        2.FIFO - 先进先出：按对象进入缓存的顺序来移除他们
+        3.SOFT - 软引用：移除基于垃圾收集器状态和软引用规则的对象。
+        4.WEAK - 弱引用：更积极的移除基于垃圾收集器状态和弱引用规则的对象
+    -->
+    <!-- flushInterval 缓存时间清空缓存，单位毫秒 -->
+    <!-- size 缓存上限，即使是List也是一个对象 -->
+    <!-- readOnly 只读，取出的是缓存本身，不然取出的是副本进行修改，效率低 -->
+    <cache eviction="LRU" flushInterval="600000" size="512" readOnly="true"/>
+    <select id="selectAll" resultType="DevelopmentFrameWork.Mybatis.Entity.emp" useCache="false">
+        select *
+        from t_emp
+        order by empno desc limit 10
+    </select>
+
+    <!-- 单参数 -->
+    <select id="selectById" parameterType="Integer"
+            resultType="DevelopmentFrameWork.Mybatis.Entity.emp">
+        select *
+        from t_emp
+        where empno = #{value}
+    </select>
+
+
+    <select id="selectByName" parameterType="String"
+            resultType="DevelopmentFrameWork.Mybatis.Entity.emp">
+        select *
+        from t_emp
+        where ename = #{value}
+    </select>
+
+    <!-- 多参数 -->
+    <select id="selectByPriceRange" parameterType="java.util.Map"
+            resultType="DevelopmentFrameWork.Mybatis.Entity.emp">
+        select *
+        from t_emp
+        where sal between #{min} and #{max}
+        order by sal limit 0,#{limit}
+    </select>
+
+    <select id="selectempMap" resultType="java.util.LinkedHashMap">
+        select e.*, d.dname, '10' as test
+        from t_emp e,
+             t_dept d
+        where e.deptno = d.deptno
+    </select>
+
+
+    <resultMap id="rmemp" type="DevelopmentFrameWork.Mybatis.dto.empDTO">
+        <!-- 设置主键字段与属性映射 -->
+        <id property="emp.empno" column="empno"></id>
+        <!-- 设置非主键字段与属性映射 -->
+        <result property="emp.ename" column="ename"></result>
+        <result property="emp.job" column="jobg"></result>
+        <result property="emp.mgr" column="mgr"></result>
+        <result property="emp.hiredate" column="hiredate"></result>
+        <result property="emp.sal" column="sal"></result>
+        <result property="emp.comm" column="comm"></result>
+        <result property="emp.deptno" column="deptno"></result>
+
+        <result property="dname" column="dname"></result>
+        <result property="test" column="test"></result>
+    </resultMap>
+    <select id="selectempDTO" resultMap="rmemp">
+        select e.*, d.dname, '10' as test
+        from t_emp e,
+             t_dept d
+        where e.deptno = d.deptno
+    </select>
+
+    <insert id="insert" parameterType="DevelopmentFrameWork.Mybatis.Entity.emp" flushCache="true">
+        INSERT INTO t_emp(empno,ename,job,mgr,hiredate,sal,comm,deptno)
+        VALUES (#{empno},#{ename},#{job},#{mgr},#{hiredate},#{sal},#{comm},#{deptno})
+        <selectKey resultType="Integer" keyProperty="empno" order="AFTER">
+            select last_insert_id()
+        </selectKey>
+    </insert>
+
+    <!--    <insert id="insert" parameterType="DevelopmentFrameWork.Mybatis.Basic.Entity.emp"-->
+    <!--            useGeneratedKeys="true"-->
+    <!--            keyProperty="empno"-->
+    <!--            keyColumn="empno">-->
+    <!--        INSERT INTO t_emp(empno,ename,job,mgr,hiredate,sal,comm,deptno)-->
+    <!--        VALUES (#{empno},#{ename},#{job},#{mgr},#{hiredate},#{sal},#{comm},#{deptno})-->
+    <!--    </insert>-->
+
+    <!-- Oracle 选取nextval -->
+    <!--    <insert id="insert" parameterType="DevelopmentFrameWork.Mybatis.Basic.Entity.emp">-->
+    <!--        INSERT INTO t_emp(empno,ename,job,mgr,hiredate,sal,comm,deptno)-->
+    <!--        VALUES (#{empno},#{ename},#{job},#{mgr},#{hiredate},#{sal},#{comm},#{deptno})-->
+    <!--        <selectKey resultType="Integer" keyProperty="empno" order="BEFORE">-->
+    <!--            SELECT seq_emp.nextval as id from dual-->
+    <!--        </selectKey>-->
+    <!--    </insert>-->
+
+    <update id="update" parameterType="DevelopmentFrameWork.Mybatis.Entity.emp">
+        UPDATE t_emp
+        SET
+            ename    = #{ename},
+            job      = #{job},
+            mgr      = #{mgr},
+            hiredate = #{hiredate},
+            sal      = #{sal},
+            comm     = #{comm},
+            deptno   = #{deptno}
+        WHERE
+            empno = #{empno}
+    </update>
+
+    <delete id="delete" parameterType="String">
+        delete from t_emp where ename = #{value}
+    </delete>
+
+    <select id="selectByJob" parameterType="java.util.Map" resultType="DevelopmentFrameWork.Mybatis.Entity.emp">
+        select * from t_emp where job = #{job}
+    </select>
+
+    <select id="dynamicSQL" parameterType="java.util.Map" resultType="DevelopmentFrameWork.Mybatis.Entity.emp">
+        select * from t_emp
+        where
+            1=1
+            <if test="job != null">
+                and job = #{job}
+            </if>
+            <if test="empno != null">
+                and empno &lt; #{empno}
+            </if>
+    </select>
+
+
+    <!--
+        resultMap 可用于说明一对多或者多对一的映射逻辑
+        id 是resultMap属性的引用标志
+        type 指向One的实体
+    -->
+    <resultMap id="rmemp1" type="DevelopmentFrameWork.Mybatis.Entity.emp">
+        <!-- 映射到emp对象的主键到empno 字段 -->
+        <id column="empno" property="empno"></id>
+        <!--
+            collection 的含义是 select * from t_emp limit 0,1 得到结果后，对emp对象遍历得到empno字段值
+            并代入到deptlist命名空间的selectByDeptLocal来进行执行查询
+            将得到的商品详情作为集合付给deptList对象
+        -->
+        <collection property="habbits" select="habbit.selectByEmpno" column="empno"></collection>
+    </resultMap>
+    <select id="selectOnetoMany" resultMap="rmemp1">
+        select * from t_emp limit 0,1
+    </select>
+
+    <select id="selectPage" resultType="DevelopmentFrameWork.Mybatis.Entity.emp">
+        select * from t_emp where sal &lt; 9000
+    </select>
+
+</mapper>

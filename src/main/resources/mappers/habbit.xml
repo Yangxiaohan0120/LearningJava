@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="habbit">
+    <select id="selectByEmpno" parameterType="Integer" resultType="DevelopmentFrameWork.Mybatis.Entity.habbit">
+        select * from t_habbit where empno = #{empno}
+    </select>
+
+
+    <resultMap id="rmhabbit" type="DevelopmentFrameWork.Mybatis.Entity.habbit">
+        <id column="empno" property="empno"></id>
+        <association property="Emp" select="emp.selectById" column="empno"></association>
+    </resultMap>
+
+    <select id="selectManytoOne" resultMap="rmhabbit">
+        select * from t_habbit limit 0,1
+    </select>
+
+
+</mapper>

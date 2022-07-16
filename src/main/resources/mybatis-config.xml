@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <settings>
+        <!-- 如果表格中有属性的名称是有下划线的话，会直接转换成驼峰命名法 -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
+
+    <!--
+        helperDialect：分页插件会自动检测当前的数据库链接，自动选择合适的分页方式。
+        你可以配置helperDialect属性来指定分页插件使用哪种方言。配置时，可以使用下面的缩写值：
+        oracle,mysql,mariadb,sqlite,hsqldb,postgresql,db2,sqlserver,informix,h2,sqlserver2012,derby
+        特别注意：使用 SqlServer2012 数据库时，需要手动指定为 sqlserver2012，否则会使用 SqlServer2005 的方式进行分页。
+        你也可以实现 AbstractHelperDialect，然后配置该属性为实现类的全限定名称即可使用自定义的实现方法。
+    -->
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+            <!-- 设置数据库类型 -->
+            <property name="helperDialect" value="mysql"/>
+            <!-- 设置分页合理化 -->
+            <property name="reasonable" value="true"/>
+        </plugin>
+    </plugins>
+
+    <!-- 采用默认编码使用默认使用的环境变量 -->
+    <environments default="development">
+        <environment id="development">
+            <!-- 采用JDBC方式对数据库事物进行commit/rollback -->
+            <transactionManager type="JDBC"/>
+            <!-- 采用连接池方式管理数据库连接 -->
+            <!--            <dataSource type="POOLED"> &lt;!&ndash; 连接池 &ndash;&gt; -->
+            <!--                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>-->
+            <!--                <property name="url" value="jdbc:mysql://localhost:3306/demo?useUnicode=true&amp;characterEncoding=UTF-8"/>-->
+            <!--                <property name="username" value="root"/>-->
+            <!--                <property name="password" value="Gossip7699"/>-->
+            <!--            </dataSource>-->
+            <dataSource type="DevelopmentFrameWork.Mybatis.datasource.C3P0DataSourceFactory">
+                <property name="driverClass" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/demo?useUnicode=true&amp;characterEncoding=UTF-8"/>
+                <property name="user" value="root"/>
+                <property name="password" value="Gossip7699"/>
+                <property name="initialPoolSize" value="5"/>
+                <property name="maxPoolSize" value="20"/>
+                <property name="minPoolSize" value="5"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <mapper resource="mappers/emp.xml"></mapper>
+        <mapper resource="mappers/habbit.xml"></mapper>
+    </mappers>
+</configuration>
