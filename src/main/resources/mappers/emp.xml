@@ -17,6 +17,8 @@
     <!-- size 缓存上限，即使是List也是一个对象 -->
     <!-- readOnly 只读，取出的是缓存本身，不然取出的是副本进行修改，效率低 -->
     <cache eviction="LRU" flushInterval="600000" size="512" readOnly="true"/>
+
+
     <select id="selectAll" resultType="DevelopmentFrameWork.Mybatis.Entity.emp" useCache="false">
         select *
         from t_emp
@@ -83,6 +85,7 @@
         VALUES (#{empno},#{ename},#{job},#{mgr},#{hiredate},#{sal},#{comm},#{deptno})
         <selectKey resultType="Integer" keyProperty="empno" order="AFTER">
             select last_insert_id()
+            <!-- 返回最后插入的编号 -->
         </selectKey>
     </insert>
 
@@ -105,36 +108,38 @@
 
     <update id="update" parameterType="DevelopmentFrameWork.Mybatis.Entity.emp">
         UPDATE t_emp
-        SET
-            ename    = #{ename},
+        SET ename    = #{ename},
             job      = #{job},
             mgr      = #{mgr},
             hiredate = #{hiredate},
             sal      = #{sal},
             comm     = #{comm},
             deptno   = #{deptno}
-        WHERE
-            empno = #{empno}
+        WHERE empno = #{empno}
     </update>
 
     <delete id="delete" parameterType="String">
-        delete from t_emp where ename = #{value}
+        delete
+        from t_emp
+        where ename = #{value}
     </delete>
 
     <select id="selectByJob" parameterType="java.util.Map" resultType="DevelopmentFrameWork.Mybatis.Entity.emp">
-        select * from t_emp where job = #{job}
+        select *
+        from t_emp
+        where job = #{job}
     </select>
 
     <select id="dynamicSQL" parameterType="java.util.Map" resultType="DevelopmentFrameWork.Mybatis.Entity.emp">
         select * from t_emp
         where
-            1=1
-            <if test="job != null">
-                and job = #{job}
-            </if>
-            <if test="empno != null">
-                and empno &lt; #{empno}
-            </if>
+        1=1
+        <if test="job != null">
+            and job = #{job}
+        </if>
+        <if test="empno != null">
+            and empno &lt; #{empno}
+        </if>
     </select>
 
 
@@ -154,11 +159,32 @@
         <collection property="habbits" select="habbit.selectByEmpno" column="empno"></collection>
     </resultMap>
     <select id="selectOnetoMany" resultMap="rmemp1">
-        select * from t_emp limit 0,1
+        select *
+        from t_emp limit 0,1
     </select>
 
     <select id="selectPage" resultType="DevelopmentFrameWork.Mybatis.Entity.emp">
-        select * from t_emp where sal &lt; 9000
+        select *
+        from t_emp
+        where sal &lt; 9000
     </select>
 
+    <!-- INSERT INTO table -->
+    <!-- VALUES ("a","a1","a2"),("b","b1","b2") -->
+    <insert id="batchInsert" parameterType="java.util.List">
+        INSERT INTO t_emp (empno,ename,job,mgr,hiredate,sal,comm,deptno)
+        VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.empno},#{item.ename},#{item.job},#{item.mgr},#{item.hiredate},#{item.sal},#{item.comm},#{item.deptno})
+        </foreach>
+    </insert>
+
+    <delete id="batchDelete" parameterType="java.util.List">
+        DELETE
+        FROM t_emp
+        where empno in
+        <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </delete>
 </mapper>

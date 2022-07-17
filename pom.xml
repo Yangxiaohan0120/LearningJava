@@ -22,6 +22,7 @@
     <name>LearningJava</name>
     <packaging>war</packaging>
 
+    <!-- 阿里云镜像提高jar包下载速度 -->
     <repositories>
         <repository>
             <id>aliyun</id>
@@ -89,6 +90,13 @@
             <groupId>com.mchange</groupId>
             <artifactId>c3p0</artifactId>
             <version>0.9.5.5</version>
+        </dependency>
+
+        <!-- Spring -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>5.3.22</version>
         </dependency>
 
     </dependencies>

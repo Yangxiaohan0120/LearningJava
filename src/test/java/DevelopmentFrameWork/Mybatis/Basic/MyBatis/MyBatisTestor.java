@@ -1,6 +1,7 @@
 package DevelopmentFrameWork.Mybatis.Basic.MyBatis;
 
 import DevelopmentFrameWork.Mybatis.Entity.habbit;
+import DevelopmentFrameWork.Mybatis.dao.empDAO;
 import DevelopmentFrameWork.Mybatis.dto.empDTO;
 import DevelopmentFrameWork.Mybatis.Entity.emp;
 import Utils.MyBatisUtils.MyBatisUtils;
@@ -15,10 +16,8 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.io.Reader;
 import java.sql.Connection;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * @author Chris Yang
@@ -120,7 +119,7 @@ public class MyBatisTestor {
     }
 
     @Test
-    public void testSelectempMap(){
+    public void testSelectempMap() {
         SqlSession sqlSession = null;
         try {
             sqlSession = MyBatisUtils.openSession();
@@ -137,7 +136,7 @@ public class MyBatisTestor {
     }
 
     @Test
-    public void testSelectempDTO(){
+    public void testSelectempDTO() {
         SqlSession sqlSession = null;
         try {
             sqlSession = MyBatisUtils.openSession();
@@ -154,7 +153,7 @@ public class MyBatisTestor {
     }
 
     @Test
-    public void testInsert(){
+    public void testInsert() {
         SqlSession sqlSession = null;
         try {
             sqlSession = MyBatisUtils.openSession();
@@ -163,18 +162,18 @@ public class MyBatisTestor {
             emp.setEname("Chris");
             emp.setJob("MANAGER");
             emp.setMgr(7999);
-            emp.setHiredate(new Date(2022,7,15));
+            emp.setHiredate(new Date(2022, 7, 15));
             emp.setSal(5000.00);
             emp.setComm(1200.00);
             emp.setDeptno(10);
 
             // 返回本次插入成功的记录总数
-            int num = sqlSession.insert("insert",emp);
+            int num = sqlSession.insert("insert", emp);
             // 提交事务数据
             sqlSession.commit();
             System.out.println(emp.getEmpno());
         } catch (Exception e) {
-            if(sqlSession != null){
+            if (sqlSession != null) {
                 sqlSession.rollback(); // 回滚事务
             }
             throw e;
@@ -184,16 +183,16 @@ public class MyBatisTestor {
     }
 
     @Test
-    public void testUpdate(){
+    public void testUpdate() {
         SqlSession sqlSession = null;
         try {
             sqlSession = MyBatisUtils.openSession();
-            emp emp = sqlSession.selectOne("selectByName","Chris");
+            emp emp = sqlSession.selectOne("selectByName", "Chris");
             emp.setEname("Hanna");
-            int num = sqlSession.update("update",emp);
+            int num = sqlSession.update("update", emp);
             sqlSession.commit();
         } catch (Exception e) {
-            if(sqlSession != null){
+            if (sqlSession != null) {
                 sqlSession.rollback();
             }
             throw e;
@@ -203,14 +202,14 @@ public class MyBatisTestor {
     }
 
     @Test
-    public void testDelete(){
+    public void testDelete() {
         SqlSession sqlSession = null;
         try {
             sqlSession = MyBatisUtils.openSession();
-            int num = sqlSession.delete("delete","Hanna");
+            int num = sqlSession.delete("delete", "Hanna");
             sqlSession.commit();
         } catch (Exception e) {
-            if(sqlSession != null){
+            if (sqlSession != null) {
                 sqlSession.rollback();
             }
             throw e;
@@ -226,11 +225,11 @@ public class MyBatisTestor {
             sqlSession = MyBatisUtils.openSession();
             Map param = new HashMap();
 //            param.put("job","'CLERK'");
-            param.put("job","''or 1=1 or job = 'CLERK'");
+            param.put("job", "''or 1=1 or job = 'CLERK'");
 
 //            param.put("order"," order by empno desc");
             List<emp> list = sqlSession.selectList("emp.selectByJob", param);
-            for(emp p : list){
+            for (emp p : list) {
                 System.out.println(p.getEmpno() + ":" + p.getJob());
             }
         } catch (Exception e) {
@@ -246,10 +245,10 @@ public class MyBatisTestor {
         try {
             sqlSession = MyBatisUtils.openSession();
             Map param = new HashMap();
-            param.put("job","CLERK");
-            param.put("empno",7900);
+            param.put("job", "CLERK");
+            param.put("empno", 7900);
             List<emp> list = sqlSession.selectList("emp.dynamicSQL", param);
-            for(emp p : list){
+            for (emp p : list) {
                 System.out.println(p.getEmpno() + ":" + p.getJob());
             }
         } catch (Exception e) {
@@ -265,7 +264,7 @@ public class MyBatisTestor {
         try {
             sqlSession = MyBatisUtils.openSession();
             emp emp = sqlSession.selectOne("emp.selectByName", "SMITH");
-            emp emp1 = sqlSession.selectOne("emp.selectByName","SMITH");
+            emp emp1 = sqlSession.selectOne("emp.selectByName", "SMITH");
             System.out.println(emp.getEmpno());
             System.out.println(emp1.getEmpno());
             System.out.println(emp.hashCode() + " : " + emp1.hashCode());
@@ -282,7 +281,7 @@ public class MyBatisTestor {
         try {
             sqlSession = MyBatisUtils.openSession();
             emp emp = sqlSession.selectOne("emp.selectByName", "SMITH");
-            emp emp1 = sqlSession.selectOne("emp.selectByName","SMITH");
+            emp emp1 = sqlSession.selectOne("emp.selectByName", "SMITH");
             System.out.println(emp.getEmpno());
             System.out.println(emp1.getEmpno());
             System.out.println(emp.hashCode() + " : " + emp1.hashCode());
@@ -295,7 +294,7 @@ public class MyBatisTestor {
         try {
             sqlSession = MyBatisUtils.openSession();
             emp emp = sqlSession.selectOne("emp.selectByName", "SMITH");
-            emp emp1 = sqlSession.selectOne("emp.selectByName","SMITH");
+            emp emp1 = sqlSession.selectOne("emp.selectByName", "SMITH");
             System.out.println(emp.getEmpno());
             System.out.println(emp1.getEmpno());
             System.out.println(emp.hashCode() + " : " + emp1.hashCode());
@@ -307,12 +306,12 @@ public class MyBatisTestor {
     }
 
     @Test
-    public void testselectOnetoMany(){
+    public void testselectOnetoMany() {
         SqlSession sqlSession = null;
         try {
             sqlSession = MyBatisUtils.openSession();
             List<emp> list = sqlSession.selectList("emp.selectOnetoMany");
-            for(emp p : list){
+            for (emp p : list) {
                 System.out.println(p.getEmpno() + ":" + p.getHabbits().size());
             }
         } catch (Exception e) {
@@ -323,12 +322,12 @@ public class MyBatisTestor {
     }
 
     @Test
-    public void testselectManytoOne(){
+    public void testselectManytoOne() {
         SqlSession sqlSession = null;
         try {
             sqlSession = MyBatisUtils.openSession();
             List<habbit> list = sqlSession.selectList("habbit.selectManytoOne");
-            for(habbit h : list){
+            for (habbit h : list) {
                 System.out.println(h.getIndex() + ":" + h.getHabbit() + ":" + h.getEmp().getEname());
             }
         } catch (Exception e) {
@@ -339,11 +338,11 @@ public class MyBatisTestor {
     }
 
     @Test
-    public void testSelectPage(){
+    public void testSelectPage() {
         SqlSession sqlSession = null;
         try {
             sqlSession = MyBatisUtils.openSession();
-            PageHelper.startPage(2,10);
+            PageHelper.startPage(2, 10);
             // 返回Page
             Page<emp> page = (Page) sqlSession.selectList("emp.selectPage");
             System.out.println("总页数" + page.getPages());
@@ -352,7 +351,7 @@ public class MyBatisTestor {
             System.out.println("结束行号" + page.getEndRow());
             System.out.println("当前页码" + page.getPageNum());
             List<emp> data = page.getResult();
-            for (emp p : data){
+            for (emp p : data) {
                 System.out.println(p.getEname());
             }
             System.out.println("");
@@ -363,4 +362,108 @@ public class MyBatisTestor {
         }
     }
 
+    @Test
+    public void testBatchInsert() {
+        SqlSession sqlSession = null;
+        try {
+            Long st = new Date().getTime();
+            System.out.println();
+            sqlSession = MyBatisUtils.openSession();
+            List list = new ArrayList();
+            for (int i = 0; i < 1000; i++) {
+                emp p = new emp();
+                p.setEmpno(8000 + i + 20);
+                p.setEname("TestName");
+                p.setJob("MANAGER");
+                p.setMgr(7999);
+                p.setHiredate(new Date());
+                p.setSal(5000.00);
+                p.setComm(1200.00);
+                p.setDeptno(10);
+                list.add(p);
+            }
+            sqlSession.insert("emp.batchInsert", list);
+            sqlSession.commit();
+            long et = new Date().getTime();
+            System.out.println("=====================================");
+            System.out.println("执行时间" + (et - st) + "毫秒");
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            MyBatisUtils.closeSession(sqlSession);
+        }
+    }
+
+    @Test
+    public void testBatchDelete() {
+        SqlSession sqlSession = null;
+        try {
+            Long st = new Date().getTime();
+            System.out.println();
+            sqlSession = MyBatisUtils.openSession();
+            List list = new ArrayList();
+            for (int i = 0; i < 1000; i++) {
+                list.add(8000 + i + 20);
+            }
+            sqlSession.insert("emp.batchDelete", list);
+            sqlSession.commit();
+            long et = new Date().getTime();
+            System.out.println("=====================================");
+            System.out.println("执行时间" + (et - st) + "毫秒");
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            MyBatisUtils.closeSession(sqlSession);
+        }
+    }
+
+    @Test
+    public void testSelectByPriceRange_annotation(){
+        SqlSession sqlSession = null;
+        try{
+            sqlSession = MyBatisUtils.openSession();
+            empDAO pDAO = sqlSession.getMapper(empDAO.class);
+            List<emp> list = pDAO.selectByPriceRange(1000.00,2000.00,2);
+            System.out.println(list.size());
+        }catch (Exception e){
+            throw e;
+        }finally {
+            MyBatisUtils.closeSession(sqlSession);
+        }
+    }
+
+    @Test
+    public void testInsert_annotation() {
+        SqlSession sqlSession = null;
+        try {
+            sqlSession = MyBatisUtils.openSession();
+            emp emp = new emp();
+            emp.setEmpno(7948);
+            emp.setEname("Chris");
+            emp.setJob("MANAGER");
+            emp.setMgr(7999);
+            emp.setHiredate(new Date(2022, 7, 15));
+            emp.setSal(5000.00);
+            emp.setComm(1200.00);
+            emp.setDeptno(10);
+
+            //
+            empDAO pDAO = sqlSession.getMapper(empDAO.class);
+
+            // 返回本次插入成功的记录总数
+            int num = pDAO.insert(emp);
+            // 提交事务数据
+            sqlSession.commit();
+            System.out.println(emp.getEmpno());
+        } catch (Exception e) {
+            if (sqlSession != null) {
+                sqlSession.rollback(); // 回滚事务
+            }
+            throw e;
+        } finally {
+            MyBatisUtils.closeSession(sqlSession);
+        }
+    }
+
 }
+

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 在IoC容器启动时，会自动由Spring实例化Apple对象，取名sweetApple 放入到容器中 -->
+    <bean id="sweetApple" class="DevelopmentFrameWork.Spring.IoC.Entity.Apple">
+        <property name="title" value="红富士"></property>
+        <property name="color" value="红色"></property>
+        <property name="origin" value="欧洲"></property>
+    </bean>
+
+    <bean id="sourApple" class="DevelopmentFrameWork.Spring.IoC.Entity.Apple">
+        <property name="title" value="青苹果"></property>
+        <property name="color" value="绿色"></property>
+        <property name="origin" value="中亚"></property>
+    </bean>
+
+    <bean id="softApple" class="DevelopmentFrameWork.Spring.IoC.Entity.Apple">
+        <property name="title" value="金帅"></property>
+        <property name="color" value="黄色"></property>
+        <property name="origin" value="中国"></property>
+    </bean>
+
+    <bean id="lily" class="DevelopmentFrameWork.Spring.IoC.Entity.Child">
+        <property name="name" value="Lily"></property>
+        <property name="apple" ref="sweetApple"></property>
+    </bean>
+
+    <bean id="andy" class="DevelopmentFrameWork.Spring.IoC.Entity.Child">
+        <property name="name" value="Andy"></property>
+        <property name="apple" ref="sourApple"></property>
+    </bean>
+
+    <bean id="luna" class="DevelopmentFrameWork.Spring.IoC.Entity.Child">
+        <property name="name" value="Luna"></property>
+        <property name="apple" ref="softApple"></property>
+    </bean>
+
+    <!-- 利用构造方法参数名实例化 -->
+    <bean id="sweetApple1" class="DevelopmentFrameWork.Spring.IoC.Entity.Apple">
+        <!-- 没有constructor-arg 代表调用默认构造方法实例化-->
+        <constructor-arg name="title" value="红富士1"/>
+        <constructor-arg name="color" value="红色1"/>
+        <constructor-arg name="origin" value="欧洲1"/>
+    </bean>
+
+    <bean id="sweetApple2" class="DevelopmentFrameWork.Spring.IoC.Entity.Apple">
+        <!-- 没有constructor-arg 代表调用默认构造方法实例化-->
+        <!-- 参数的位置 -->
+        <constructor-arg index="0" value="红富士2"/>
+        <constructor-arg index="1" value="红色2"/>
+        <constructor-arg index="2" value="欧洲2"/>
+    </bean>
+
+    <!--自动调整参数个数 -->
+    <bean id="sweetApple3" class="DevelopmentFrameWork.Spring.IoC.Entity.Apple">
+        <!-- 没有constructor-arg 代表调用默认构造方法实例化-->
+        <constructor-arg name="title" value="红富士1"/>
+        <constructor-arg name="color" value="红色1"/>
+        <constructor-arg name="origin" value="欧洲1"/>
+        <constructor-arg name="price" value="19.8"/>
+    </bean>
+
+    <bean id="sweetApple4" class="DevelopmentFrameWork.Spring.IoC.Entity.Apple">
+        <!-- 没有constructor-arg 代表调用默认构造方法实例化-->
+        <!-- 参数的位置 -->
+        <constructor-arg index="0" value="红富士2"/>
+        <constructor-arg index="1" value="红色2"/>
+        <constructor-arg index="2" value="欧洲2"/>
+        <constructor-arg index="3" value="19.8"/>
+    </bean>
+
+    <bean id="sweetApple5" class="DevelopmentFrameWork.Spring.IoC.Factory.AppleStaticFactory"
+        factory-method="createSweetApple">
+    </bean>
+
+    <!-- 先实例化实例化工厂的对象 -->
+    <bean id="factoryInstance" class="DevelopmentFrameWork.Spring.IoC.Factory.AppleFactoryInstance"/>
+    <bean id="sweetApple6" factory-bean="factoryInstance" factory-method="createSweetApple"/>
+
+
+    <bean class="DevelopmentFrameWork.Spring.IoC.Entity.Apple">
+
+    </bean>
+</beans>
