@@ -8,4 +8,8 @@ public class UserDao {
     public UserDao() {
         System.out.println("userDao已创建" + this);
     }
+
+    public void insert(){
+        System.out.println("插入一条用户的数据");
+    }
 }

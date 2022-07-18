@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="userDao" class="DevelopmentFrameWork.Spring.AOP.dao.UserDao"/>
+    <bean id="employeeDao" class="DevelopmentFrameWork.Spring.AOP.dao.EmployeeDao"/>
+    <bean id="userService" class="DevelopmentFrameWork.Spring.AOP.service.UserService">
+        <property name="userDao" ref="userDao"/>
+    </bean>
+    <bean id="employeeService" class="DevelopmentFrameWork.Spring.AOP.service.EmployeeService">
+        <property name="employeeDao" ref="employeeDao"/>
+    </bean>
+
+    <!-- AOP 配置 -->
+    <bean id="methodAspect" class="DevelopmentFrameWork.Spring.AOP.aspect.MethodAspect"></bean>
+    <aop:config>
+        <!-- PointCut 切点，使用execution表达式描述切面的作用范围 -->
+        <!-- execution 表达式说明切面作用在DevelopmentFrameWork.Spring包下的所有类的所有方法 -->
+        <aop:pointcut id="pointcut" expression="execution(public * DevelopmentFrameWork.Spring..*.*(..))"/>
+        <!-- 定义切面类 -->
+        <aop:aspect ref="methodAspect">
+            <!-- before通知，代表在目标方法运行前，先执行methodAspect.printExecutionTime() -->
+            <aop:before method="printExecutionTime" pointcut-ref="pointcut"/>
+            <aop:after method="doAfter" pointcut-ref="pointcut"/>
+            <aop:after-returning method="doAfterReturning" returning="ret" pointcut-ref="pointcut"/>
+            <aop:after-throwing method="doAfterThrowing" throwing="throwable" pointcut-ref="pointcut"/>
+        </aop:aspect>
+    </aop:config>
+
+    <bean id="methodChecker" class="DevelopmentFrameWork.Spring.AOP.aspect.MethodChecker"></bean>
+    <aop:config>
+        <aop:pointcut id="pointcut" expression="execution(public * DevelopmentFrameWork.Spring..*.*(..))"/>
+        <aop:aspect ref="methodChecker">
+            <aop:around method="check" pointcut-ref="pointcut"></aop:around>
+        </aop:aspect>
+    </aop:config>
+
+
+</beans>
