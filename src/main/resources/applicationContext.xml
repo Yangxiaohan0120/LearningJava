@@ -18,6 +18,7 @@
     </bean>
 
     <bean id="softApple" class="DevelopmentFrameWork.Spring.IoC.Entity.Apple">
+        <!-- IoC容器利用反射机制，运行时自动使用setter方法为属性赋值 -->
         <property name="title" value="金帅"></property>
         <property name="color" value="黄色"></property>
         <property name="origin" value="中国"></property>
@@ -81,7 +82,57 @@
     <bean id="sweetApple6" factory-bean="factoryInstance" factory-method="createSweetApple"/>
 
 
+    <!-- 没有name的bean -->
     <bean class="DevelopmentFrameWork.Spring.IoC.Entity.Apple">
 
+    </bean>
+
+    <!-- 插入集合 -->
+    <bean id="c1" class="DevelopmentFrameWork.Spring.IoC.Entity.Computer">
+        <constructor-arg name="brand" value="联想"></constructor-arg>
+        <constructor-arg name="type" value="台式机"></constructor-arg>
+        <constructor-arg name="sn" value="8282943029"></constructor-arg>
+        <constructor-arg name="price" value="3850"></constructor-arg>
+    </bean>
+
+    <bean id="company" class="DevelopmentFrameWork.Spring.IoC.Entity.Company">
+        <property name="rooms">
+            <list>
+                <value>2001-总裁办</value>
+                <value>2003-总经理办公室</value>
+                <value>2010-研发部会议室</value>
+            </list>
+        </property>
+        <property name="computers">
+            <map>
+                <entry key="dev-88172" value-ref="c1"/>
+                <entry key="dev-88173">
+                    <bean class="DevelopmentFrameWork.Spring.IoC.Entity.Computer">
+                        <constructor-arg name="brand" value="联想"/>
+                        <constructor-arg name="type" value="笔记本"/>
+                        <constructor-arg name="sn" value="9214801948"/>
+                        <constructor-arg name="price" value="5060"/>
+                    </bean>
+                </entry>
+            </map>
+        </property>
+        <property name="info">
+            <props>
+                <prop key="phone">010-23456699</prop>
+                <prop key="address">北京市朝阳区西澳大厦</prop>
+                <prop key="website">http://www.baidu.com</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="userDao" class="DevelopmentFrameWork.Spring.IoC.dao.UserDao" scope="prototype"></bean>
+
+    <bean id="userService" class="DevelopmentFrameWork.Spring.IoC.service.UserService">
+        <property name="userDao" ref="userDao"></property>
+    </bean>
+
+    <bean id="order1" class="DevelopmentFrameWork.Spring.IoC.Entity.Order" init-method="init" destroy-method="destroy">
+        <property name="price" value="19.8"></property>
+        <property name="quantity" value="1000"/>
     </bean>
 </beans>
