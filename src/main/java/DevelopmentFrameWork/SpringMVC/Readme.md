@@ -1,1 +1,1 @@
-## [SpringMVC Project](https://github.com/Yangxiaohan0120/SpringMVC/tree/master)
+## [SpringMVC Project](https://github.com/Yangxiaohan0120/springmvc/tree/master)
