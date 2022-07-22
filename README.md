@@ -17,5 +17,5 @@
 
 #### [Spring MVC](https://github.com/Yangxiaohan0120/LearningJava/tree/main/src/main/java/DevelopmentFrameWork/SpringMVC)
 
-#### [SSM In Action](https://github.com/Yangxiaohan0120/LearningJava/tree/main/src/main/java/DevelopmentFrameWork/SSMpractice)
+#### [SSM In Action](https://github.com/Yangxiaohan0120/LearningJava/tree/main/src/main/java/DevelopmentFrameWork/SSMPractice)
 
