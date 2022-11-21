@@ -72,7 +72,7 @@ class Condition_{
         return response != null;
     }
 
-    private void doReceiced(Response res){
+    private void doReceived(Response res){
         lock.lock();
         try{
             response = res;

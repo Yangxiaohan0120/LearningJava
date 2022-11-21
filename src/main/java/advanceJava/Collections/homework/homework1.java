@@ -13,8 +13,8 @@ import java.util.ArrayList;
 public class homework1 {
     public static void main(String[] args) {
         ArrayList arrayList = new ArrayList();
-        arrayList.add(new News("新冠确诊病例超千万，数百万印度教信徒赴恒河\"圣浴\"引民众担忧"));
-        arrayList.add(new News("男子突然想起2个月前钓的鱼还在网兜里，捞起一看赶紧放生"));
+//        arrayList.add(new News("新冠确诊病例超千万，数百万印度教信徒赴恒河\"圣浴\"引民众担忧"));
+//        arrayList.add(new News("男子突然想起2个月前钓的鱼还在网兜里，捞起一看赶紧放生"));
 
         int size = arrayList.size();
         for (int i = size - 1; i >= 0; i--) {
