@@ -19,6 +19,7 @@ public class MergeSort {
         sort(arr, 0, arr.length - 1, temp);
     }
 
+    // SortUp2Down
     private static <E extends Comparable<E>> void sort(E[] arr, int l, int r, E[] temp) {
         if (l >= r) return;
 

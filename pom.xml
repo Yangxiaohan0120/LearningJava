@@ -7,6 +7,9 @@
     <groupId>com.example</groupId>
     <artifactId>LearningJava</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>LeetCode</module>
+    </modules>
     <build>
         <plugins>
             <plugin>
@@ -20,7 +23,7 @@
         </plugins>
     </build>
     <name>LearningJava</name>
-    <packaging>war</packaging>
+    <packaging>pom</packaging>
 
     <!-- 阿里云镜像提高jar包下载速度 -->
     <repositories>
